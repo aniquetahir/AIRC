@@ -1,2 +1,2 @@
-# Airc
+# AIRC
 IRC client for OSX
