@@ -2,74 +2,35 @@
 <html lang="en">
     <meta charset="UTF-8">
     <title>AIRC</title>
-    <link rel="stylesheet" href="node_modules/material-design-lite/dist/material.min.css">
-    <script src="node_modules/material-design-lite/dist/material.js"></script>
-    <style>
-        @font-face {
-            font-family: Roboto;
-            src: url("css/RobotoTTF/Roboto-Regular.ttf");
-        }
-    </style>
-
-    <!-- Wide card with share menu button -->
-    <style>
-        .demo-card-wide.mdl-card {
-            width: 100%;
-            height: 100%;
-        }
-        .demo-card-wide > .mdl-card__title {
-            color: #fff;
-            height: 76px;
-            background: #000066;
-        }
-        .demo-card-wide > .mdl-card__menu {
-            color: #fff;
-        }
-        .welcome > .mdl-card > .mdl-card__actions{
-            position:absolute;
-            bottom: 0px;
-        }
-    </style>
 </head>
 <body>
-    <div class="mdl-layout mdl-js-layout welcome">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title">
-                <h1 class="mdl-card__title-text">aIRC</h1>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <p>Login</p>
-                    </div>
-                </div>
-                <div class="mdl-grid" style="max-width: 50%;">
-                        <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="username" />
-                                    <label class="mdl-textfield__label" for="username">Username</label>
-                                </div>
-                        </div>
-                </div>
+    <form method="post" id="frmCredentials">
+        <input type="text" placeholder="Username" id="username" />
+        <input type="password" placeholder="Password" id="password" />
 
-                <div class="mdl-grid" style="max-width: 50%;">
-                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="password" id="password" />
-                            <label class="mdl-textfield__label" for="password">Password</label>
-                        </div>
-                    </div>
-                </div>
+        <input type="text" placeholder="Server" id="server" />
 
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Join
-                </a>
-            </div>
+        <button id="join">Join</button>
+    </form>
 
-        </div>
-    </div>
+    <script>
+        var btnJoin = document.getElementById("join");
+        btnJoin.addEventListener('click', function(){
+            var frmCredentials = document.getElementById("frmCredentials");
+            frmCredentials.submit();
+        });
 
+        var sendCredentials = function(){
+
+
+        };
+
+        //Test asynchronous message
+        var ipc=require('ipc');
+        ipc.send('asynchronous-message', 'Ping');
+        ipc.on('asynchronous-reply', function(arg){
+            console.log(arg);
+        });
+    </script>
 </body>
 </html>

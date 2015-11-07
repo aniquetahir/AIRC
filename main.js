@@ -6,6 +6,7 @@
 
 var app = require('app');  //Module to control application life.
 var BrowserWindow = require('browser-window');  //Module to create native browser window
+var ipc = require('ipc');
 
 //Require crashes to the server
 require('crash-reporter').start();
@@ -15,6 +16,18 @@ require('crash-reporter').start();
  * GC'd and closed
  */
 var mainWindow = null;
+
+
+ipc.on('asynchronous-message', function(event, arg){
+    console.log(arg);
+    event.sender.send('asynchronous-reply', 'pong');
+});
+
+ipc.on('synchronous-message', function(event, arg){
+    console.log(arg);
+    event.returnValue('pong');
+});
+
 
 app.on('window-all-closed', function(){
     //Allow OSX users to quit application using CMD+Q
